@@ -1,0 +1,25 @@
+# Ignore config files
+config/*
+
+# Ignore imported modules
+node_modules/*
+
+# Ignore log files
+logs/*
+
+# Ignore mongo data
+data/*
+
+# Ignore data from old server
+fromlive/*
+
+# Ignore old json from way back when
+json/*
+
+# Ignore data backups
+backups/*
+
+# Bits & pieces
+email.txt
+notes.txt
+json/*

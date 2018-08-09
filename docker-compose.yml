@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/srv/app
+    networks:
+      - nodeapp-network
+    depends_on: 
+      - db
+    links:
+      - db
+      
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - nodeapp-network
+    volumes:
+      - ./data/db:/data/db
+      - ./data/configdb:/data/configdb
+      - ./fromlive:/fromlive
+
+networks:
+  nodeapp-network:
+    driver: bridge
