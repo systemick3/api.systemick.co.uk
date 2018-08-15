@@ -24,7 +24,8 @@ var twitterLogin = function (req, res, next) {
         token_secret: oauth_token_secret
       };
 
-      req.session.siteUrl = req.body.siteUrl;
+      //req.session.siteUrl = req.body.siteUrl;
+      req.session.siteUrl ='https://tweetreport.co.uk';
 
       res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token);
     }
@@ -73,11 +74,14 @@ var twitterLoginCallback = function (req, res, next) {
             token,
             original_token;
 
-          for (var property in results) {
+          /*for (var property in results) {
             if (results.hasOwnProperty(property)) {
               profile[property] = results[property];
             }
-          }
+          }*/
+
+          profile.user_id = results.user_id;
+          profile.screen_name = results.screen_name;
 
           for (var property in req.session.oauth) {
             if (req.session.oauth.hasOwnProperty(property)) {
@@ -201,9 +205,6 @@ var userData = function (req, res, next) {
     if (err) {
       return next(err);
     }
-
-    console.log('USER');
-    console.log(user);
 
     user.last_sync = d.getTime();
 

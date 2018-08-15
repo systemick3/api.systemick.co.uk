@@ -210,8 +210,6 @@ var getUserAnalysis = function (req, res, next) {
       return next(err);
     }
 
-    console.log(data);
-
     ua.syncUserTweets(data, function (err) {
       if (err) {
         return next(err);

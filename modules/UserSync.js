@@ -108,8 +108,6 @@ UserSync.prototype = {
                       callback(err);
                     }
 
-                    console.log(analysis);
-
                     return callback(null, analysis);
 
                   });

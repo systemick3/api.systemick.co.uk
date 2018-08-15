@@ -22,7 +22,6 @@ app.set("jsonp callback", true);
 /////////////////////////// DATABASE CONNECTIONS /////////////////////////////////
 
 var dbUrl = process.env.MONGOHQ_URL ||  config.mongo;
-console.log('dbUrl = ' + dbUrl);
 if (!dbUrl) {
   throw new Error('Missing url for mongodb');
 }
@@ -105,7 +104,6 @@ routes.attachHandlers(app);
 
 // Default routes
 app.get('/', function (req, res, next) {
-  console.log('DB TEST /'); 
   tweetappDb.collection('mtest').findOne({fname: "Heidi"}, function(e, data){
     if (e) {
       console.log('ERROR 2');
@@ -113,23 +111,6 @@ app.get('/', function (req, res, next) {
     console.log(data);
     res.send('Success');
   });
-
-  /*var MongoClient = require('mongodb').MongoClient;
-  MongoClient.connect('mongodb://db:27017', (err, client) => {
-    if (err) {
-      console.log('ERROR 1');
-    }
-    
-    // Client returned
-    var db = client.db('miketesting');
-
-    db.collection('mtest').findOne({fname: "Mike"}, function(e, data){
-      if (e) {
-        console.log('ERROR 2');
-      }
-      console.log(data);
-      res.send('Success');
-    });*/
 });
 
 app.get('/api', function (req, res, next) {
@@ -152,8 +133,8 @@ var server = http.createServer(app);
 
 var boot = function () {
   // Swap the lines below when testing
-  //server.listen(app.get('port'), function () { 	// live
-  server.listen(app.get('testPort'), function () {  // testing
+  server.listen(app.get('port'), function () { 	// live
+  //server.listen(app.get('testPort'), function () {  // testing
     console.info('Express server listening on port ' + app.get('port'));
     console.info('Current environment is ' + app.get('env'));
   });

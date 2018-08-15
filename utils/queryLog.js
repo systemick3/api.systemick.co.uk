@@ -23,6 +23,6 @@ logger.query(options, function (err, result) {
         throw err;
     }
 
-    console.log('Results...');
-    console.log(result);
+    //console.log('Results...');
+    //console.log(result);
 });

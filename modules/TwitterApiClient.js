@@ -42,9 +42,6 @@ TwitterApiClient.prototype = {
       cached = req.twitterCache[cacheKey];
     }
 
-    console.log('CACHED');
-    console.log(cached);
-
     if (cached && (+now - cached.when < hour)) {
       console.log('in TwitterApiClient retrieving data from cache');
       callback(null, cached.data);
@@ -52,13 +49,9 @@ TwitterApiClient.prototype = {
       console.log('in TwitterApiClient retrieving data from Twitter');
       this.client.get(path, params, function (err, data) {
         if (err) {
-          console.log('TWITTER ERROR');
           console.log(err);
           return callback(err);
         }
-
-        console.log('DATA');
-        console.log(data);
 
         if (cacheKey && req) {
           var date = new Date();
@@ -137,7 +130,6 @@ TwitterApiClient.prototype = {
   post: function (path, params, callback) {
     this.client.post(path, params, function (err, data) {
       if (err) {
-        console.log('TWITTER ERROR');
         console.log(err);
         return callback(err);
       }
